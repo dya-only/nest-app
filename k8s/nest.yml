@@ -30,3 +30,16 @@ spec:
           value: "nestpassword"
         - name: DATABASE_SCHEMA
           value: "nest"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nest-service
+spec:
+  ports:
+    - port: 3000
+      protocol: TCP
+  selector:
+    app: nest
