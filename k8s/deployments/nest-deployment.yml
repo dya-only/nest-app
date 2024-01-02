@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nest-deployment
+  labels:
+    app: nest
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nest
+  template:
+    metadata:
+      labels:
+        app: nest
+    spec:
+      containers:
+      - name: nest
+        image: dyaonly/nest-with-mariadb:arm
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DATABASE_HOST
+          value: mariadb-service
+        - name: DATABASE_PORT
+          value: "3306"
+        - name: DATABASE_USERNAME
+          value: "nestuser"
+        - name: DATABASE_PASSWORD
+          value: "nestpassword"
+        - name: DATABASE_SCHEMA
+          value: "nest"

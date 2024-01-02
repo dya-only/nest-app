@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - cd backend
+      - aws --version
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/l9d5m0q6
+      - npm install yarn
+  build:
+    commands:
+      - docker build -t blur-backend .
+  post_build:
+    commands:
+      - docker tag blur-backend:latest public.ecr.aws/l9d5m0q6/blur-backend:latest
+      - docker push public.ecr.aws/l9d5m0q6/blur-backend:latest
+      - echo Writing image definitions file...
+      - printf '[{"name":"nestjs-example-container","imageUri":"%s"}]' 572095694744.dkr.ecr.ap-northeast-2.amazonaws.com/nestjs-example:latest > imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json
