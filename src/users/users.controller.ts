@@ -13,6 +13,11 @@ export class UsersController {
     private usersService: UsersService
   ) {}
 
+  @Get('health')
+  public async healthCheck() {
+    return 'Health OK'
+  }
+
   @Post()
   public async createUser(@Body() createUserDto: CreateUserDto) {
     const isLoginClaimed = await this.usersService.checkLoginClaim(createUserDto.login)
