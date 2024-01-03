@@ -5,7 +5,6 @@ import { AuthMiddleware } from '../auth/auth.middleware'
 import { AuthModule } from 'src/auth/auth.module'
 import { UsersModule } from 'src/users/users.module'
 import { ConfigurationModule } from '../configuration/configuration.module'
-import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -26,8 +25,7 @@ import { AppController } from './app.controller';
     ConfigurationModule,
     UsersModule,
     AuthModule
-  ],
-  controllers: [AppController],
+  ]
 })
 export class AppModule implements NestModule {
   public configure(consumer: MiddlewareConsumer): void {

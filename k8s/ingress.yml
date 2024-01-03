@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: nest-ingress
 spec:
+  ingressClassName: ingress
   rules:
   - http:
       paths:
