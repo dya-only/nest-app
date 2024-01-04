@@ -35,6 +35,7 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         run: |
           docker build -t ${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} --push -f Dockerfile .
+        working-directory: ./
 
   deploy:
     needs: build
