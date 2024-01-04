@@ -9,7 +9,7 @@ jobs:
   prebuild:
     runs-on: ubuntu-latest
     outputs:
-      ecr_repository: ${{ steps.set_vars.outputs.ecr_repository }}
+      hub_repository: ${{ steps.set_vars.outputs.hub_repository }}
       image_tag: ${{ steps.set_vars.outputs.image_tag }}
     steps:
       - name: Checkout
@@ -18,7 +18,7 @@ jobs:
       - name: Set environment variables
         id: set_vars
         run: |
-          echo "::set-output name=ecr_repository::l9d5m0q6/k8s-nest"
+          echo "::set-output name=hub_repository::dyaonly/k8s-nest"
           echo "::set-output name=image_tag::latest"
 
       - name: Configure AWS credentials
@@ -42,19 +42,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Login to Amazon ECR
+      - name: Build, tag, and push image to Docker Hub
         run: |
-          echo "Logging into Amazon ECR..."
-          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin 658986583341.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
-
-      - name: Login to Amazon ECR Public
-        id: login-ecr-public
-        uses: aws-actions/amazon-ecr-login@v2
-
-        # 658986583341.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/
-      - name: Build, tag, and push image to Amazon ECR
-        run: |
-          docker build -t ${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} --push .
+          docker build -t ${{ needs.prebuild.outputs.hub_repository }}:${{ needs.prebuild.outputs.image_tag }} --push .
 
   deploy:
     needs: build
