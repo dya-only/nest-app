@@ -55,9 +55,8 @@ jobs:
 
       - name: Build, tag, and push image to Amazon ECR
         run: |
-          aws ecr-public get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin public.ecr.aws
-          docker build -t ${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} .
-          docker push ${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }}
+          docker build -t public.ecr.aws/${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} .
+          docker push public.ecr.aws/${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }}
 
   deploy:
     needs: build
