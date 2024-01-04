@@ -35,12 +35,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Login to Amazon ECR Public
+        id: login-ecr-public
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registry-type: public
+
       - name: Build, tag, and push image to Amazon ECR
         run: |
-          aws ecr-public get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin public.ecr.aws/l9d5m0q6
           docker build -t ${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} .
-          docker tag k8s-nest:latest public.ecr.aws/l9d5m0q6/k8s-nest:latest
-          docker push public.ecr.aws/l9d5m0q6/k8s-nest:latest
+          docker push ${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }}
 
   deploy:
     needs: build
