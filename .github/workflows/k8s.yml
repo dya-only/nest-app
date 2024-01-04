@@ -45,7 +45,7 @@ jobs:
       - name: Login to Amazon ECR
         run: |
           echo "Logging into Amazon ECR..."
-          aws ecr-public get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin public.ecr.aws/l9d5m0q6
+          aws ecr-public get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 658986583341.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com//l9d5m0q6
 
       - name: Login to Amazon ECR Public
         id: login-ecr-public
@@ -55,7 +55,7 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         run: |
         
-          docker build -t public.ecr.aws/${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} --push .
+          docker build -t 658986583341.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} --push .
 
   deploy:
     needs: build
