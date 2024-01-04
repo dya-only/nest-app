@@ -51,10 +51,11 @@ jobs:
         id: login-ecr-public
         uses: aws-actions/amazon-ecr-login@v2
 
+        # 658986583341.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/
       - name: Build, tag, and push image to Amazon ECR
         run: |
-          docker build -t 658986583341.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} .
-          docker push 658986583341.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }}
+        
+          docker build -t public.ecr.aws/${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} --push .
 
   deploy:
     needs: build
