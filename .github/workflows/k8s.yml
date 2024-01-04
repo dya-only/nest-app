@@ -48,8 +48,6 @@ jobs:
           registry: public.ecr.aws
           username: ${{ secrets.AWS_ACCESS_KEY_ID }}
           password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
 
       - name: Login to Amazon ECR Public
         id: login-ecr-public
@@ -57,6 +55,7 @@ jobs:
 
       - name: Build, tag, and push image to Amazon ECR
         run: |
+          aws ecr-public get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin public.ecr.aws
           docker build -t ${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} .
           docker push ${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }}
 
