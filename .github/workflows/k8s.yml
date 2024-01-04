@@ -18,7 +18,7 @@ jobs:
       - name: Set environment variables
         id: set_vars
         run: |
-          echo "::set-output name=ecr_repository::l9d5m0q6/k8s-nest"
+          echo "::set-output name=ecr_repository::public.ecr.aws/l9d5m0q6/k8s-nest"
           echo "::set-output name=image_tag::latest"
 
       - name: Configure AWS credentials
@@ -55,8 +55,8 @@ jobs:
 
       - name: Build, tag, and push image to Amazon ECR
         run: |
-          docker build -t public.ecr.aws/${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} .
-          docker push public.ecr.aws/${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }}
+          docker build -t ${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} .
+          docker push ${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }}
 
   deploy:
     needs: build
