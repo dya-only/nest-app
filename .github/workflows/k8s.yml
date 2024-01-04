@@ -18,7 +18,7 @@ jobs:
       - name: Set environment variables
         id: set_vars
         run: |
-          echo "::set-output name=ecr_repository::public.ecr.aws/l9d5m0q6/k8s-nest"
+          echo "::set-output name=ecr_repository::k8s-nest"
           echo "::set-output name=image_tag::latest"
 
       - name: Configure AWS credentials
