@@ -45,7 +45,7 @@ jobs:
       - name: Login to Amazon ECR
         run: |
           echo "Logging into Amazon ECR..."
-          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin 658986583341.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+          aws ecr-public get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin public.ecr.aws/l9d5m0q6
 
       - name: Login to Amazon ECR Public
         id: login-ecr-public
