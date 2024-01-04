@@ -35,6 +35,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+
       - name: Build, tag, and push image to Amazon ECR
         run: |
           docker build -t ${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} --push .
