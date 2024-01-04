@@ -33,9 +33,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build, tag, and push image to Amazon ECR
-        working-directory: /
         run: |
-          docker build -t ${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} --push .
+          docker build -t ${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} --push -f Dockerfile .
 
   deploy:
     needs: build
