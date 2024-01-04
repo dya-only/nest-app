@@ -32,11 +32,12 @@ jobs:
     needs: prebuild
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Build, tag, and push image to Amazon ECR
         run: |
-          cd /
           docker build -t ${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} --push .
-        working-directory: ./
 
   deploy:
     needs: build
