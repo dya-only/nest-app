@@ -54,8 +54,7 @@ jobs:
         # 658986583341.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/
       - name: Build, tag, and push image to Amazon ECR
         run: |
-        
-          docker build -t 658986583341.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} --push .
+          docker build -t ${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} --push .
 
   deploy:
     needs: build
