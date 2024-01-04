@@ -45,7 +45,7 @@ jobs:
       - name: Login to Amazon ECR
         run: |
           echo "Logging into Amazon ECR..."
-          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin [account-id].dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin 658986583341.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
 
       - name: Login to Amazon ECR Public
         id: login-ecr-public
@@ -53,8 +53,8 @@ jobs:
 
       - name: Build, tag, and push image to Amazon ECR
         run: |
-          docker build -t [account-id].dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} .
-          docker push [account-id].dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }}
+          docker build -t 658986583341.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }} .
+          docker push 658986583341.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ needs.prebuild.outputs.ecr_repository }}:${{ needs.prebuild.outputs.image_tag }}
 
   deploy:
     needs: build
