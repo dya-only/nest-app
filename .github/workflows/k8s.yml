@@ -68,5 +68,5 @@ jobs:
 
       - name: Deploy to EKS
         run: |
-          aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.K8S_CLUSTER_NAME }} --role-arn arn:aws:iam::658986583341:role/k8s-role-cluster
+          aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.K8S_CLUSTER_NAME }}
           kubectl apply -f k8s/. --validate=false
