@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 node:lts-alpine AS build
+FROM node:lts-alpine AS build
 
 WORKDIR /build
 
@@ -13,7 +13,7 @@ COPY . /build/
 
 RUN pnpm build
 
-FROM --platform=linux/amd64 node:lts-alpine AS modules
+FROM node:lts-alpine AS modules
 
 WORKDIR /modules
 
@@ -24,7 +24,7 @@ RUN npm i -g pnpm
 
 RUN pnpm i -P
 
-FROM --platform=linux/amd64 alpine AS app
+FROM alpine AS app
 
 WORKDIR /app
 

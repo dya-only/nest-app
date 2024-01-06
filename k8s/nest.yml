@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nest
-        image: dyaonly/nest-with-mariadb:latest
+        image: dyaonly/k8s-nest:latest
         ports:
         - containerPort: 3000
         env:
