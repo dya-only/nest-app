@@ -8,14 +8,14 @@ services:
     ports:
       - 3000:3000
 
-  db:
+  mariadb-service:
     image: mariadb
     expose:
       - 3306
     environment:
       - MARIADB_ROOT_PASSWORD=root
-      - MARIADB_DATABASE=duttry
-      - MARIADB_USER=duttry
-      - MARIADB_PASSWORD=duttrypassword
+      - MARIADB_DATABASE=nest
+      - MARIADB_USER=nestuser
+      - MARIADB_PASSWORD=nestpassword
     volumes:
       - ./data/db:/var/lib/mysql
