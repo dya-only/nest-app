@@ -69,6 +69,5 @@ jobs:
       - name: Deploy to AWS EKS
         run: |
           aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name k8s-cluster
-          kubectl delete -f k8s/.
           kubectl apply -f k8s/.
           
