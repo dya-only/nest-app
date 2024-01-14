@@ -13,6 +13,8 @@ COPY . /build/
 
 RUN pnpm build
 
+# ---
+
 FROM node:lts-alpine AS modules
 
 WORKDIR /modules
@@ -23,6 +25,8 @@ COPY pnpm-lock.yaml /modules/pnpm-lock.yaml
 RUN npm i -g pnpm
 
 RUN pnpm i -P
+
+# ---
 
 FROM alpine AS app
 

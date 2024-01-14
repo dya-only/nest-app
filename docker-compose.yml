@@ -5,15 +5,19 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    restart: always
     ports:
       - 3000:3000
+    depends_on:
+      - db
 
-  mariadb-service:
-    image: mariadb
+  db:
+    image: mariadb:latest
+    restart: always
     expose:
       - 3306
     environment:
-      - MARIADB_ROOT_PASSWORD=root
+      - MARIADB_ROOT_PASSWORD=password
       - MARIADB_DATABASE=nest
       - MARIADB_USER=nestuser
       - MARIADB_PASSWORD=nestpassword

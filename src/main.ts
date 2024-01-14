@@ -24,14 +24,11 @@ async function bootstrap() {
   }))
 
   const docs = new DocumentBuilder()
-    .setTitle('Duttry')
-    .setDescription('Duttry: Block Coding Platform Entry Clone.')
+    .setTitle('Nest')
+    .setDescription('Nest App Template.')
     .setVersion('0.0')
     .addTag('auth', 'Authorization & Authentication')
     .addTag('users', 'User profile & management')
-    .addTag('projects', '')
-    .addTag('objects', '')
-    .addTag('blocks', '')
     .addCookieAuth('TOKEN')
     .build()
 

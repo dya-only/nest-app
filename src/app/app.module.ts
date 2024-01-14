@@ -13,7 +13,7 @@ import { ConfigurationModule } from '../configuration/configuration.module'
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'mysql',
-        host: configService.get('DATABASE_HOST', 'mariadb-service'),
+        host: configService.get('DATABASE_HOST', 'db'),
         port: configService.get('DATABASE_PORT', 3306),
         username: configService.get('DATABASE_USERNAME', 'nestuser'),
         password: configService.get('DATABASE_PASSWORD', 'nestpassword'),

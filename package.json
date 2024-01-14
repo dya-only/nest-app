@@ -1,7 +1,7 @@
 {
-  "name": "nest-app",
+  "name": "backend",
   "version": "0.0.1",
-  "description": "",
+  "description": "nest app template",
   "author": "",
   "private": true,
   "license": "UNLICENSED",

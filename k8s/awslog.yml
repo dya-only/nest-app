@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: aws-logging
-  namespace: kube-system
-data:
-  log-types: "[\"api\", \"audit\", \"authenticator\", \"controllerManager\", \"scheduler\"]"
